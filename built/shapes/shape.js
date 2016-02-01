@@ -7,7 +7,7 @@ var Shape = (function () {
         this.size = size;
     }
     Shape.prototype.draw = function () {
-        ctx.box(this.position.x, this.position.y, this.size.x, this.size.y);
+        ctx.box(Math.round(this.position.x), Math.round(this.position.y), this.size.x, this.size.y);
     };
     ;
     return Shape;

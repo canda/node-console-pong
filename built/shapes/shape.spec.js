@@ -27,5 +27,12 @@ describe('Shape', function () {
             shape.draw();
             expect(ctx.box.calls.argsFor(0)).toEqual([position.x, position.y, size.x, size.y]);
         });
+        it('should round positions', function () {
+            position.x = 1.4;
+            position.y = 1.6;
+            shape.draw();
+            expect(ctx.box.calls.argsFor(0)[0]).toEqual(1);
+            expect(ctx.box.calls.argsFor(0)[1]).toEqual(2);
+        });
     });
 });

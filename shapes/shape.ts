@@ -15,7 +15,7 @@ export class Shape {
   }
 
   draw (): void {
-    ctx.box(this.position.x, this.position.y,
+    ctx.box(Math.round(this.position.x), Math.round(this.position.y),
         this.size.x, this.size.y);
   };
 
