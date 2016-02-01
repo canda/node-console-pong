@@ -1,0 +1,26 @@
+{
+  "name": "node-console-pong",
+  "version": "0.0.0",
+  "description": "Pong to be played on a node terminal written on typescript",
+  "main": "built/app.js",
+  "scripts": {
+    "start": "node built/app.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/canda/node-console-pong.git"
+  },
+  "author": "Javier Candalaft",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/canda/node-console-pong/issues"
+  },
+  "dependencies": {
+    "keypress": "~0.2.1",
+    "axel": "0.0.3"
+  },
+  "devDependencies": {
+    "jasmine": "~2.4.1"
+  }
+}
