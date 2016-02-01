@@ -5,36 +5,37 @@ var __extends = (this && this.__extends) || function (d, b) {
 };
 var ctx = require('axel');
 var moving_shape_1 = require('./moving_shape');
-var top = 0;
-var bottom = ctx.rows;
-var left = 0;
-var right = ctx.cols;
+var edges = {
+    x: {
+        min: 0,
+        max: ctx.cols
+    },
+    y: {
+        min: 0,
+        max: ctx.rows
+    }
+};
 var Ball = (function (_super) {
     __extends(Ball, _super);
-    function Ball(position, size, inintialSpeed) {
-        _super.call(this, position, size, inintialSpeed);
+    function Ball(position, size, initialSpeed) {
+        _super.call(this, position, size, initialSpeed);
     }
+    Ball.prototype.bounce = function (axis) {
+        // TODO: refactor to a single function if possible
+        if (this.position[axis] < edges[axis].min) {
+            this.position[axis] = this.position[axis] * (-1);
+            this.speed[axis] = this.speed[axis] * (-1);
+        }
+        if (this.position[axis] + this.size[axis] > edges[axis].max) {
+            // Do your maths ;)
+            this.position[axis] = 2 * edges[axis].max - 2 * this.size[axis] - this.position[axis];
+            this.speed[axis] = this.speed[axis] * (-1);
+        }
+    };
     Ball.prototype.move = function () {
         _super.prototype.move.call(this);
-        // TODO: refactor to a single function
-        if (this.position.y < top) {
-            this.position.y = this.position.y * (-1);
-            this.speed.y = this.speed.y * (-1);
-        }
-        if (this.position.y + this.size.y > bottom) {
-            // Do your maths ;)
-            this.position.y = 2 * bottom - 2 * this.size.y - this.position.y;
-            this.speed.y = this.speed.y * (-1);
-        }
-        if (this.position.x < left) {
-            this.position.x = this.position.x * (-1);
-            this.speed.x = this.speed.x * (-1);
-        }
-        if (this.position.x + this.size.x > right) {
-            // Do your maths ;)
-            this.position.x = 2 * right - 2 * this.size.x - this.position.x;
-            this.speed.x = this.speed.x * (-1);
-        }
+        this.bounce('x');
+        this.bounce('y');
     };
     ;
     return Ball;

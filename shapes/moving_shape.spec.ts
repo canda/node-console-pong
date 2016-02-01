@@ -1,11 +1,11 @@
-var assert = require("assert");
+var assert = require('assert');
 var ctx = require('axel');
 
-import {Point, Size} from './shape'
+import {Point, Size} from './shape';
 import {MovingShape, Speed} from './moving_shape';
 
 
-describe("MovingShape", function() {
+describe('MovingShape', () => {
 
   beforeEach(() => {
     spyOn(ctx, 'box');
@@ -27,8 +27,8 @@ describe("MovingShape", function() {
     movingShape = new MovingShape(position, size, speed);
   });
 
-  describe("#move()", () => {
-    it("moves the right amount of x and y position", function() {
+  describe('#move()', () => {
+    it('moves the right amount of x and y position', () => {
       movingShape.move();
       expect(movingShape.position.x).toBe(6);
       expect(movingShape.position.y).toBe(-3);

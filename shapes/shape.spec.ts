@@ -1,11 +1,11 @@
-var assert = require("assert");
+var assert = require('assert');
 var ctx = require('axel');
 
 // Shape destructuring
 import {Shape, Point, Size} from './shape';
 
 
-describe("Shape", function() {
+describe('Shape', () => {
 
   beforeEach(() => {
     spyOn(ctx, 'box');
@@ -23,12 +23,12 @@ describe("Shape", function() {
     shape = new Shape(position, size);
   });
 
-  describe("#draw()", () => {
-    it("should call ctx.box to draw the shape", function() {
+  describe('#draw()', () => {
+    it('should call ctx.box to draw the shape', () => {
       shape.draw();
       expect(ctx.box).toHaveBeenCalled();
     });
-    it("should call ctx.box to draw with size and position parameters", () => {
+    it('should call ctx.box to draw with size and position parameters', () => {
       shape.draw();
       expect(ctx.box.calls.argsFor(0)).toEqual([position.x, position.y, size.x, size.y]);
     });

@@ -2,40 +2,42 @@ var ctx = require('axel');
 import {Point, Size} from './shape';
 import {MovingShape, Speed} from './moving_shape';
 
-const top = 0;
-const bottom = ctx.rows;
-const left = 0;
-const right = ctx.cols;
+const edges = {
+  x: {
+    min: 0,
+    max: ctx.cols
+  },
+  y: {
+    min: 0,
+    max: ctx.rows
+  }
+};
+
+
 
 export class Ball extends MovingShape {
-  constructor(position: Point, size: Size, inintialSpeed: Speed) {
-    super(position, size, inintialSpeed);
+  constructor(position: Point, size: Size, initialSpeed: Speed) {
+    super(position, size, initialSpeed);
+  }
+
+  private bounce (axis: string): void {
+    // TODO: refactor to a single function if possible
+    if (this.position[axis] < edges[axis].min) {
+      this.position[axis] = this.position[axis] * (-1);
+      this.speed[axis] = this.speed[axis] * (-1);
+    }
+
+    if (this.position[axis] + this.size[axis] > edges[axis].max) {
+      // Do your maths ;)
+      this.position[axis] = 2 * edges[axis].max - 2 * this.size[axis] - this.position[axis];
+      this.speed[axis] = this.speed[axis] * (-1);
+    }
   }
 
   move (): void {
     super.move();
 
-    // TODO: refactor to a single function
-    if (this.position.y < top) {
-      this.position.y = this.position.y * (-1);
-      this.speed.y = this.speed.y * (-1);
-    }
-
-    if (this.position.y + this.size.y > bottom) {
-      // Do your maths ;)
-      this.position.y = 2 * bottom - 2 * this.size.y - this.position.y;
-      this.speed.y = this.speed.y * (-1);
-    }
-
-    if (this.position.x < left) {
-      this.position.x = this.position.x * (-1);
-      this.speed.x = this.speed.x * (-1);
-    }
-
-    if (this.position.x + this.size.x > right) {
-      // Do your maths ;)
-      this.position.x = 2 * right - 2 * this.size.x - this.position.x;
-      this.speed.x = this.speed.x * (-1);
-    }
+    this.bounce('x');
+    this.bounce('y');
   };
 }

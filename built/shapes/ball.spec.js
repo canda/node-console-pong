@@ -44,7 +44,7 @@ describe('MovingShape', function () {
             expect(ball.position.x).toBe(3);
             expect(ball.speed.x).toBe(5);
         });
-        it('bounces on bottom edge', function () {
+        it('bounces on right edge', function () {
             position.x = ctx.cols - 3;
             size.x = 2;
             speed.x = 5;
